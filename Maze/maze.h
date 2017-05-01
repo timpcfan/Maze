@@ -1,10 +1,15 @@
 #pragma once
 
-#include <stack>'
+#include <stack>
 #include <queue>
 #include <vector>
+#include <cassert>
+#include <iostream>
+#include <cstdlib>
+#include <Windows.h>
 
-enum direction { up, right, down, left }; //方向
+using namespace std;
+
 enum speed { FAST = 100, NORMAL = 300, SLOW = 500 }; //速度
 const int ROAD = 0; //路
 const int WALL = 1; //墙

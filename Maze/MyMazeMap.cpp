@@ -1,9 +1,6 @@
 #include "MyMazeMap.h"
-#include <iostream>
-#include <cstdlib>
-#include <stack>
 
-using namespace std;
+
 
 MyMazeMap::MyMazeMap()
 { //初始化数据成员
@@ -38,30 +35,10 @@ void MyMazeMap::drawMap()
 	}
 }
 
-bool MyMazeMap::isMazeBound(int x, int y, direction d)
-{ //判断面前的是不是墙
-	bool Bound = false;
-	switch (d) {
-	case direction::up:
-		if (isBound(x, y - 1)) Bound = true;
-		break;
-	case direction::right:
-		if (isBound(x + 1, y)) Bound = true;
-		break;
-	case direction::down:
-		if (isBound(x, y + 1)) Bound = true;
-		break;
-	case direction::left:
-		if (isBound(x - 1, y)) Bound = true;
-		break;
-	}
-	return Bound;
-}
 
 bool MyMazeMap::isBound(int x, int y)
 { //判断(x,y)是不是墙
-	if (isOut(x,y)) return true; //性质改动！
-	if (*(m_piMap + m_c*y + x) == WALL) return true;
+	if (isOut(x, y) || *(m_piMap + m_c*y + x) == WALL) return true;
 	return false;
 }
 
@@ -81,7 +58,7 @@ int MyMazeMap::getC()
 	return m_c;
 }
 
-void MyMazeMap::getShortestPath(POX start, POX end, vector<POX>& v)
+bool MyMazeMap::getShortestPath(POX start, POX end, vector<POX>& v)
 {
 	queue<POX> q;
 	v.clear();
@@ -108,6 +85,8 @@ void MyMazeMap::getShortestPath(POX start, POX end, vector<POX>& v)
 		}
 	}
 
+	if (!visited[__prasePOX(end)]) return false; // 获得最短路径失败，因为起点与终点不连通
+
 	stack<POX> st;
 	POX p = end;
 	while (p != from[__prasePOX(p)]){
@@ -120,6 +99,7 @@ void MyMazeMap::getShortestPath(POX start, POX end, vector<POX>& v)
 		v.push_back(p);
 	}
 	
+	return true; //获得最短路径成功
 }
 
 int MyMazeMap::__prasePOX(POX p)
