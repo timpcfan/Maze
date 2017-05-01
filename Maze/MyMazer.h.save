@@ -1,0 +1,32 @@
+#pragma once
+#include "MyMazeMap.h"
+
+struct POX {
+	int x;
+	int y;
+};
+
+class MyMazer
+{
+public:
+	enum speed { FAST = 300, NORMAL = 700, SLOW = 1000 };
+	enum direction { up, right, down, left };
+	MyMazer(int x = 0, int y = 0, speed s = NORMAL, direction d = up, char Person_Char = 'T');
+	void setPersonPosition(int x, int y);
+	void setPersonDirection(direction d);
+	void setPersonSpeed(speed s);
+	void setPersonChar(char c);
+	void setMap(MyMazeMap *m);
+	void start();
+	void turn(int d = 0);
+	void gotoxy(int x, int y);
+	void move();
+	void display();
+private:
+	char m_cPerson;
+	direction m_dDirection;
+	speed m_sSpeed;
+	POX m_sPosition;
+	POX m_sLastPosition;
+	MyMazeMap *c_pMap;
+};

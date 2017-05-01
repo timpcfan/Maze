@@ -111,8 +111,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="maze.cpp" />
+    <ClCompile Include="MyMazeMap.cpp" />
+    <ClCompile Include="MyMazer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="maze.h" />
     <ClInclude Include="MyMazeMap.h" />
     <ClInclude Include="MyMazer.h" />
   </ItemGroup>
